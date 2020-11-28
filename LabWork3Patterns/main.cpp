@@ -40,6 +40,8 @@ int main() {
 	tree.printTreeOnConsole();
 	*/
 
+	//тестирование дерева double
+	/*
 	tree.addNode(5.5);
 	tree.addNode(15);
 	tree.addNode(25);
@@ -56,38 +58,43 @@ int main() {
 	tree.printTreeOnConsole();
 	tree.deleteNode(7);
 
-
+	tree.printTreeGraphic();
 
 	tree.deleteTree();
+	*/
+
+
+	/*
+	//данные для проверки создания дерева строк
+	tree.addNode("anadvn");
+	tree.addNode("bnadvn");
+	tree.addNode("knajdvn");
+	tree.addNode("cndvn");
+	tree.addNode("onajdvn");
+	tree.deleteNode("onajdvn");
+	tree.printTreeOnConsole();
+
+	данные для проверки создания дерева строк
+	tree.addNode("anadvn");
+	tree.addNode("bnadvn");
+	tree.addNode("knajdvn");
+	tree.addNode("cndvn");
+	tree.addNode("onajdvn");
+
+	данные для проверки создания дерева double
+	tree.addNode(5.5);
+	tree.addNode(15);
+	tree.addNode(25);
+	tree.addNode(17.4);
+	tree.addNode(105);
+	tree.addNode(7);
+	tree.addNode(9);
+	tree.addNode(4);
+	tree.deleteNode(5);
+	tree.deleteNode(7);
+	tree.deleteNode(25);
+	*/
 
 	return 0;
 }
 
-////данные для проверки создания дерева строк
-//tree.addNode("anadvn");
-//tree.addNode("bnadvn");
-//tree.addNode("knajdvn");
-//tree.addNode("cndvn");
-//tree.addNode("onajdvn");
-//tree.deleteNode("onajdvn");
-//tree.printTreeOnConsole();
-
-//данные для проверки создания дерева строк
-//tree.addNode("anadvn");
-//tree.addNode("bnadvn");
-//tree.addNode("knajdvn");
-//tree.addNode("cndvn");
-//tree.addNode("onajdvn");
-
-//данные для проверки создания дерева double
-//tree.addNode(5.5);
-//tree.addNode(15);
-//tree.addNode(25);
-//tree.addNode(17.4);
-//tree.addNode(105);
-//tree.addNode(7);
-//tree.addNode(9);
-//tree.addNode(4);
-//tree.deleteNode(5);
-//tree.deleteNode(7);
-//tree.deleteNode(25);

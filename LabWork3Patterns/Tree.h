@@ -35,10 +35,10 @@ public:
     void deleteNode(T key);
 
     void deleteTree();
-
-   
     
     void printTreeOnConsole();
+
+    void printTreeGraphic();
 private:
     Node<T>* searchMinRec(Node<T>* node);
     Node<T>* searchMaxRec(Node<T>* node);
@@ -46,6 +46,7 @@ private:
     void recPreOrderWithPrint(Node<T>* node);
     void recPreOrderCalculateHeight(Node<T>* node, int tempSize);
     void deleteTreeRec(Node<T>* node);
+    void printRec(Node<T>* node, int h);
 };
 
 template <typename T>
@@ -189,7 +190,7 @@ void Tree<T>::deleteNode(T key, Node<T>* node)
         }
         //повтор кода со строк 232 т.к. иначе мы не зайдем сюда если вершина будет корнем
         else if (searchedNode->_left != nullptr && searchedNode->_right != nullptr) {
-            Node<T>* minNode = searchMax(searchedNode->_left); //ищем максимальный элемент в левом поддереве
+            Node<T>* minNode = searchMax(searchedNode->_right); //ищем максимальный элемент в левом поддереве
             T minElemT = minNode->getInf();
             deleteNode(minElemT, node); //удалим найденный элемент из поддерева, функция не уйдет в рекурсию, т.к.
                                         //если у минимального элемента не может быть двух потомков
@@ -307,4 +308,43 @@ void Tree<T>::printTreeOnConsole()
     cout << endl;
     cout << "Tree height: " << getTreeHeight() << endl;
     cout << "Tree size: " << getSize() << endl;
+}
+
+template<typename T>
+void Tree<T>::printRec(Node<T>* node, int h)
+{
+    if (node != NULL)
+    {
+        printRec(node->_left, h + 1);
+
+        for (int i = 1; i <= h; i++)
+
+            cout << "\t";
+
+        cout << node->getInf() << endl;
+
+        printRec(node->_right, h + 1);
+    }
+}
+
+void Tree<Table>::printRec(Node<Table>* node, int h)
+{
+    if (node != NULL)
+    {
+        printRec(node->_left, h + 1);
+
+        for (int i = 1; i <= h; i++)
+
+            cout << "\t";
+
+        cout << node->getInf().price << endl;
+
+        printRec(node->_right, h + 1);
+    }
+}
+
+template<typename T>
+void Tree<T>::printTreeGraphic()
+{
+    printRec(rootTree, treeHeight);
 }
