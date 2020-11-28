@@ -22,9 +22,10 @@ public:
     void setInf(T x);
     T getInf();
     static Node* addNode(Node* rootTree, T x);
-	static bool compareNodes(Node<T>* a, T b); //возвращает true, если a < b
+	static int compareNodes(Node<T>* a, T b); //возвращает true, если a < b
 };
 
+//конструктор по умолчанию
 template <typename T>
 Node<T>::Node()
 {
@@ -72,18 +73,42 @@ Node<T>* Node<T>::addNode(Node* rootTree, T x)
 }
 
 template<typename T> 
-bool Node<T>::compareNodes(Node<T>* a, T b)
+int Node<T>::compareNodes(Node<T>* a, T b)
 {
-	return a->inf > b;
+	if (a->inf < b) {
+		return -1;
+	}
+	else if (a->inf == b) {
+		return 0;
+	}
+	else {
+		return 1;
+	}
 }
 
-bool Node<string>::compareNodes(Node<string>* a, string b)
+int Node<string>::compareNodes(Node<string>* a, string b)
 {
-	return a->inf[0] > b[0];
+	if (a->inf[0] < b[0]) {
+		return -1;
+	}
+	else if (a->inf[0] == b[0]) {
+		return 0;
+	}
+	else {
+		return 1;
+	}
 }
 
-bool Node<Table>::compareNodes(Node<Table>* a, Table b)
+int Node<Table>::compareNodes(Node<Table>* a, Table b)
 {
-	return a->inf.price > b.price;
+	if (a->inf.price < b.price) {
+		return -1;
+	}
+	else if (a->inf.price == b.price) {
+		return 0;
+	}
+	else {
+		return 1;
+	}
 }
 
