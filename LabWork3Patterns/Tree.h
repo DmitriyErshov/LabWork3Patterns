@@ -42,7 +42,7 @@ public:
 private:
     Node<T>* searchMinRec(Node<T>* node);
     Node<T>* searchMaxRec(Node<T>* node);
-    void deleteNode(T key, Node<T>* node);
+    void deleteNodeRec(T key);
     void recPreOrderWithPrint(Node<T>* node);
     void recPreOrderCalculateHeight(Node<T>* node, int tempSize);
     void deleteTreeRec(Node<T>* node);
@@ -99,7 +99,7 @@ void Tree<T>::addNode(Node<T>* rootTree, T x)
             rootTree->_left->_parent = rootTree;
         }
     }
-    else	//Иначе Если новое ключевое значение не //меньше ключевого значения в узле 
+    else if(Node<T>::compareNodes(rootTree, x) == -1)	//Иначе Если новое ключевое значение меньше ключевого значения в узле 
     {
         if (rootTree->_right != nullptr)		//И если правый указатель инициализирован,
             addNode(rootTree->_right, x);		//То функция вызывает саму себя, для правого //потомка
@@ -110,6 +110,10 @@ void Tree<T>::addNode(Node<T>* rootTree, T x)
             rootTree->_right->_right = nullptr;      //и правый дочерний указатель в NULL.
             rootTree->_right->_parent = rootTree;
         }
+    }
+    //попытка добавить дубликат
+    else {
+        size--; //т.к. нерекурсивная функция addNode инкрементирует size, то в случае дубликата нам нужно уравновесить это 
     }
 }
 
@@ -173,31 +177,42 @@ Node<T>* Tree<T>::search(T key)
 }
 
 template <typename T>
-void Tree<T>::deleteNode(T key, Node<T>* node)
+void Tree<T>::deleteNodeRec(T key)
 {
-    Node<T>* searchedNode = search(key, node);
+    Node<T>* searchedNode = search(key, rootTree);
+
+    if (searchedNode == nullptr)
+        size++; //т.к. нерекурсивная функция deleteNode декрементирует size, то в случае дубликата нам нужно уравновесить это увеличив значение
+        return;
 
     //удаляемый элемент - корень
     //обрабатываем корень отдельно, т.к. он не имеет родительских вершин
-    if (searchedNode == node) {     
+    if (searchedNode == rootTree) {     
         if (searchedNode->_left != nullptr && searchedNode->_right == nullptr) {
+            Node<T>* left = rootTree->_left;
             delete rootTree;
-            rootTree = node->_left; //!!!!!
+            rootTree = left;
         }
         else if (searchedNode->_left == nullptr && searchedNode->_right != nullptr) {
+            Node<T>* right = rootTree->_right;
             delete rootTree;
-            rootTree = node->_right;
+            rootTree = right;
         }
         //повтор кода со строк 232 т.к. иначе мы не зайдем сюда если вершина будет корнем
         else if (searchedNode->_left != nullptr && searchedNode->_right != nullptr) {
-            Node<T>* minNode = searchMax(searchedNode->_right); //ищем максимальный элемент в левом поддереве
+            Node<T>* minNode = searchMin(searchedNode->_right); //ищем максимальный элемент в правом поддереве
             T minElemT = minNode->getInf();
-            deleteNode(minElemT, node); //удалим найденный элемент из поддерева, функция не уйдет в рекурсию, т.к.
+            deleteNodeRec(minElemT); //удалим найденный элемент из поддерева, функция не уйдет в рекурсию, т.к.
                                         //если у минимального элемента не может быть двух потомков
-            searchedNode->setInf(minElemT); //ставим его на место удаляемого узла
-        }   
+            rootTree->setInf(minElemT); //ставим его на место удаляемого узла
+        } 
+        //когда корень без наследников
+        else {
+            delete rootTree;
+            rootTree = nullptr;
+        }
     }
-    //если найденный элемент без потомков
+    //если найденный элемент без потомков(лист)
     else if (searchedNode->_left == nullptr && searchedNode->_right == nullptr) {
         if (searchedNode->_parent->_left == searchedNode) {
             searchedNode->_parent->_left = nullptr;
@@ -232,7 +247,7 @@ void Tree<T>::deleteNode(T key, Node<T>* node)
     else {
         Node<T>* minNode = searchMin(searchedNode->_right); //ищем минимальный элемент в правом поддереве
         T minElemT = minNode->getInf();
-        deleteNode(minElemT, node); //удалим найденный элемент из поддерева, функция не уйдет в рекурсию, т.к.
+        deleteNodeRec(minElemT); //удалим найденный элемент из поддерева, функция не уйдет в рекурсию, т.к.
                                     //если у минимального элемента не может быть двух потомков
         searchedNode->setInf(minElemT); //ставим его на место удаляемого узла
     }
@@ -241,7 +256,7 @@ void Tree<T>::deleteNode(T key, Node<T>* node)
 template <typename T>
 void Tree<T>::deleteNode(T key)
 {
-    deleteNode(key, rootTree);
+    deleteNodeRec(key);
     size--;
 }
 
@@ -346,5 +361,6 @@ void Tree<Table>::printRec(Node<Table>* node, int h)
 template<typename T>
 void Tree<T>::printTreeGraphic()
 {
-    printRec(rootTree, treeHeight);
+    printRec(rootTree, getTreeHeight());
+    cout << "_______________________________________________________________________________________" << endl;
 }

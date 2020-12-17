@@ -27,7 +27,7 @@ int main() {
 	tree.addNode(table7);
 	tree.addNode(table8);
 	tree.addNode(table9);
-	tree.printTreeOnConsole();
+	tree.printTreeGraphic();
 	
 
 	//удаление
@@ -37,11 +37,31 @@ int main() {
 
 	//удалим корень
 	tree.deleteNode(table1);
-	tree.printTreeOnConsole();
+	tree.printTreeGraphic();
 	*/
 
 	//тестирование дерева double
-	/*
+	
+	//tree.addNode(5.5);
+	//tree.addNode(15);
+	//tree.addNode(25);
+	//tree.addNode(17.4);
+	//tree.addNode(105);
+	//tree.addNode(7);
+	//tree.addNode(9);
+	//tree.addNode(2);
+	//tree.addNode(1);
+	//tree.addNode(3);
+	//
+	//tree.printTreeGraphic();
+	//tree.deleteNode(15);
+	////tree.printTreeGraphic();
+	//tree.deleteNode(7);
+
+	//tree.printTreeGraphic();
+
+	//tree.deleteTree();
+
 	tree.addNode(5.5);
 	tree.addNode(15);
 	tree.addNode(25);
@@ -52,48 +72,37 @@ int main() {
 	tree.addNode(2);
 	tree.addNode(1);
 	tree.addNode(3);
-	
-	tree.printTreeOnConsole();
-	tree.deleteNode(15);
-	tree.printTreeOnConsole();
-	tree.deleteNode(7);
+	tree.printTreeGraphic();
+
+	tree.deleteNode(5.5);
+
 
 	tree.printTreeGraphic();
 
-	tree.deleteTree();
-	*/
+	
 
 
-	/*
 	//данные для проверки создания дерева строк
-	tree.addNode("anadvn");
-	tree.addNode("bnadvn");
-	tree.addNode("knajdvn");
-	tree.addNode("cndvn");
-	tree.addNode("onajdvn");
-	tree.deleteNode("onajdvn");
-	tree.printTreeOnConsole();
+	//tree.addNode("anadvn");
+	//tree.addNode("bnadvn");
+	//tree.addNode("knajdvn");
+	//tree.addNode("cndvn");
+	//tree.addNode("onajdvn");
+	//tree.printTreeGraphic();
 
-	данные для проверки создания дерева строк
-	tree.addNode("anadvn");
-	tree.addNode("bnadvn");
-	tree.addNode("knajdvn");
-	tree.addNode("cndvn");
-	tree.addNode("onajdvn");
-
-	данные для проверки создания дерева double
-	tree.addNode(5.5);
-	tree.addNode(15);
-	tree.addNode(25);
-	tree.addNode(17.4);
-	tree.addNode(105);
-	tree.addNode(7);
-	tree.addNode(9);
-	tree.addNode(4);
-	tree.deleteNode(5);
-	tree.deleteNode(7);
-	tree.deleteNode(25);
-	*/
+	////данные для проверки создания дерева double
+	//tree.addNode(5.5);
+	//tree.addNode(15);
+	//tree.addNode(25);
+	//tree.addNode(17.4);
+	//tree.addNode(105);
+	//tree.addNode(7);
+	//tree.addNode(9);
+	//tree.addNode(4);
+	//tree.deleteNode(5);
+	//tree.deleteNode(7);
+	//tree.deleteNode(25);
+	
 
 	return 0;
 }
