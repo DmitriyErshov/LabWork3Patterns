@@ -193,11 +193,13 @@ void Tree<T>::deleteNodeRec(T key)
         if (searchedNode->_left != nullptr && searchedNode->_right == nullptr) {
             Node<T>* left = rootTree->_left;
             delete rootTree;
+            left->_parent = nullptr;
             rootTree = left;
         }
         else if (searchedNode->_left == nullptr && searchedNode->_right != nullptr) {
             Node<T>* right = rootTree->_right;
             delete rootTree;
+            right->_parent = nullptr;
             rootTree = right;
         }
         //повтор кода со строк 232 т.к. иначе мы не зайдем сюда если вершина будет корнем
@@ -232,6 +234,8 @@ void Tree<T>::deleteNodeRec(T key)
         else {
             searchedNode->_parent->_right = searchedNode->_left;
         }
+        //устанавливаем нового потомка
+        searchedNode->_left->_parent = searchedNode->_parent;
         delete searchedNode;
     }
     //элемент имеет только одного потомка справа
@@ -243,6 +247,8 @@ void Tree<T>::deleteNodeRec(T key)
         else {
             searchedNode->_parent->_left = searchedNode->_right;
         }
+        //устанавливаем нового потомка
+        searchedNode->_right->_parent = searchedNode->_parent;
         delete searchedNode;
     }
     //элемент имеет два потомка

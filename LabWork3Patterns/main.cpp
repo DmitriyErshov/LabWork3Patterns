@@ -76,12 +76,43 @@ int main() {
 
 	tree.deleteNode(5.5);
 
+	tree.printTreeGraphic();
+
+	tree.deleteNode(2);
+	
+	tree.printTreeGraphic();
+
+	tree.deleteNode(1);
 
 	tree.printTreeGraphic();
 
-	
+	tree.deleteNode(7);
 
+	tree.printTreeGraphic();
 
+	tree.deleteNode(25);
+
+	tree.printTreeGraphic();
+
+	tree.deleteNode(15);
+
+	tree.printTreeGraphic();
+
+	tree.deleteNode(9);
+
+	tree.printTreeGraphic();
+
+	tree.deleteNode(105);
+
+	tree.printTreeGraphic();
+
+	tree.deleteNode(17.4);
+
+	tree.printTreeGraphic();
+
+	tree.deleteNode(3);
+
+	tree.printTreeGraphic();
 	//данные для проверки создания дерева строк
 	//tree.addNode("anadvn");
 	//tree.addNode("bnadvn");
