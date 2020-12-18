@@ -181,9 +181,11 @@ void Tree<T>::deleteNodeRec(T key)
 {
     Node<T>* searchedNode = search(key, rootTree);
 
-    if (searchedNode == nullptr)
+    if (searchedNode == nullptr) {
         size++; //т.к. нерекурсивная функция deleteNode декрементирует size, то в случае дубликата нам нужно уравновесить это увеличив значение
         return;
+    }
+
 
     //удаляемый элемент - корень
     //обрабатываем корень отдельно, т.к. он не имеет родительских вершин
